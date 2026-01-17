@@ -1,0 +1,277 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    background: rgba(255, 255, 255, 0.80);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.5); 
+    backdrop-filter: blur(12px);
+	display: flex;
+	flex-direction: column;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif; 
+    color: #0F172A;
+}
+
+.dimensions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+	border: 2px solid #475569;
+    background-color: #F8FAFC;
+    border-radius: 6px;
+    font-family: 'Roboto Slab', serif; 
+    font-weight: 700;
+    color: #0F172A;
+    text-align: center;
+}
+
+input:focus {
+    outline: 3px solid #06B6D4; 
+    border-color: transparent;
+}
+
+.matrix {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.vector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(10px) scale(0.95);
+    pointer-events: none;
+    overflow: hidden;
+  
+    will-change: transform, opacity; 
+    
+    transition: 
+        opacity 0.2s ease-out,
+        transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        max-height 0.2s ease-in-out,
+        margin 0.2s ease;
+}
+
+.vector.show {
+    opacity: 1;
+    max-height: 400px;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    margin: 0 10px;
+}
+
+.vector label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.vector input {
+    width: 60px;
+    padding: 6px;
+    margin-bottom: 6px;
+    text-align: center;
+	border: 2px solid #475569; 
+    background-color: #F8FAFC;
+    border-radius: 6px;
+  
+    opacity: 0; 
+    max-height: 0;
+    transform: scaleY(0);
+    transition:
+        opacity 0.3s ease,
+        max-height 0.3s ease, 
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    overflow: hidden;
+}
+
+.vector input.visible {
+    opacity: 1;
+    max-height: 40px;
+    transform: scaleY(1);
+    margin-bottom: 6px;
+}
+
+button {
+	padding: 12px 24px; 
+    background-color: #1E40AF; 
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s;
+}
+
+button:hover {
+    background-color: #1E3A8A;
+}
+
+button:focus {
+    outline: 3px solid #06B6D4;
+}
+
+.compute {
+    display: block;
+    width: 65%;
+    margin: 20px auto 0;
+    align-items: center;
+}
+
+#output {
+    margin-top: 25px;
+    font-family: 'Roboto Slab', monospace;
+    white-space: pre-wrap;
+    text-align: center;
+}
+
+.matrix-display {
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-left: 3px solid #0F172A;
+    border-right: 3px solid #0F172A;
+    align-items: center;
+}
+
+.matrix-row {
+    display: flex;
+}
+
+.matrix-cell {
+    width: 50px;
+    text-align: center;
+    padding: 6px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.dimensions label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+}
+
+.dimensions label sup {
+    font-family: 'Roboto Slab', serif;
+    font-size: 0.8em;
+}
+
+.step {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    border-radius: 12px;
+    flex: 0 1 350px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.step h3 {
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+#steps {
+    margin-top: 30px;
+    font-family: "Cambria Math", "Times New Roman", serif;
+    text-align: center;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.controls button {
+    background-color: #FFFFFF;
+    color: #1E40AF;
+    border: 2px solid #1E40AF;
+}
+
+.controls button:hover {
+    background-color: #EFF6FF;
+}
+
+.dimensions label sup, .vector label, .vector input, .matrix-cell, input[type="number"] {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.05em;
+}
+
+.math-text {
+    font-style: normal; 
+}
+.math-text sup {
+    font-style: italic;
+}
+
+.vector label, .vector input, .matrix-cell, input[type="number"], .dimensions label sup, .math-text {
+    font-family: 'Roboto Slab', serif; 
+    font-style: normal; 
+    font-size: 1.05em;
+    color: #0F172A;
+}
+
+.section-box {
+    background: rgba(255, 255, 255, 0.5); 
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+	
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-box h1, .section-box h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#output {
+	width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#output:empty {
+    display: none;
+}
